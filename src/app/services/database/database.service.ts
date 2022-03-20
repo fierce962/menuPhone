@@ -29,8 +29,7 @@ export class DatabaseService {
   }
 
   async getMenuOptions(typeOptions: string): Promise<OptionsMenu>{
-    console.log(typeOptions);
-    return await getDocs(query(collection(this.db, 'menuOptions'), where('type', '==', typeOptions)))
+    return await getDocs(query(collection(this.db, 'menuOptions'), where('category', '==', typeOptions)))
     .then(results=>{
       const options: OptionsMenu | any = results.docs[0].data();
       return options;

@@ -15,5 +15,5 @@ export interface Products{
 
 export interface OptionsMenu{
     options: string[];
-    type: string;
+    category: string;
 }

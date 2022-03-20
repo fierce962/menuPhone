@@ -12,19 +12,46 @@ export class MenuProductsComponent implements OnInit {
   @Output() selected: EventEmitter<string> = new EventEmitter();
 
   allOptions: OptionsMenu;
-  partialOptions: string;
+  partialOptions: string[];
   viewOptions = false;
+
+  numberOptions: number;
+
+  btnRigthDisabled = false;
+  btnLeftDisabled = true;
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit() {}
 
-  async selectedOptionsType(select: string): Promise<void>{
+  async selectOptionsType(select: string): Promise<void>{
     this.allOptions = await this.db.getMenuOptions(select);
-    // this.partialOptions = this.allOptions.options.filter((option, index)=>{
-    //   return 
-    // })
+    this.partialOptions = this.allOptions.options.slice(0, 5);
     this.viewOptions = true;
+  }
+
+  changeViewOptions(newNumberOption: number): void{
+    if(this.numberOptions === undefined){
+      this.numberOptions = newNumberOption;
+    }else{
+      this.numberOptions += newNumberOption;
+    }
+    const positionEnd: number = this.numberOptions + 5;
+    this.partialOptions = this.allOptions.options.slice(this.numberOptions, positionEnd);
+    this.allowEnabledBtn();
+  }
+
+  allowEnabledBtn(): void{
+    if(this.numberOptions + 5 > this.allOptions.options.length){
+      this.btnRigthDisabled = true;
+    }else{
+      this.btnRigthDisabled = false;
+    }
+    if(this.numberOptions !== undefined && this.numberOptions >= 5){
+      this.btnLeftDisabled = false;
+    }else{
+      this.btnLeftDisabled = true;
+    }
   }
 
 }
