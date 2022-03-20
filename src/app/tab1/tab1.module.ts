@@ -3,18 +3,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-
+import { ScanQrComponent } from '../Components/scan-qr/scan-qr.component';
+import { MenuProductsComponent } from '../Components/menu-products/menu-products.component';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, ScanQrComponent, MenuProductsComponent]
 })
 export class Tab1PageModule {}

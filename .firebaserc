@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "menuphone-4c622": {
+      "hosting": {
+        "app": [
+          "menuphone-4c622"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "menuphone-4c622"
+  }
+}

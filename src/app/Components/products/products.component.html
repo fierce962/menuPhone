@@ -1,0 +1,28 @@
+
+<div class="product">
+
+  <img class="product__img" src="../../../assets/test.jpg" alt="">
+
+  <div class="product__info">
+    <h1 class="product__info-title">Ceviche de Camarón</h1>
+    <p class="product__info-description">Pescado de roca, camarón, pepino, apio y palta</p>
+    <p class="product__price">$10.500</p>
+  </div>
+
+  <div class="product__request">
+    <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, 0)" color="primary">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+
+    <div class="product__request-content-input">
+      <ion-input #inputs class="product__request-input" 
+        (keyup)="validKeyInput(0)" (ionBlur)="blurInput(0)" value="1"></ion-input>
+    </div>
+
+    <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, 0)" color="primary">
+      <ion-icon name="remove-outline"></ion-icon>
+    </ion-button>
+    <ion-button class="product__request-btn" color="primary">Ordenar</ion-button>
+  </div>
+
+</div>
