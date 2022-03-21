@@ -47,6 +47,10 @@
         display: flex;
         justify-content: space-between;
     }
+    &__paginator{
+        width: calc(100% - 140px);
+        height: 36px;
+    }
 }
 
 @keyframes view-left {

@@ -17,6 +17,9 @@ export class MenuProductsComponent implements OnInit {
 
   numberOptions: number;
 
+  paginatorPosition = 0;
+  paginatorOptions: number[] = [];
+
   btnRigthDisabled = false;
   btnLeftDisabled = true;
 
@@ -27,6 +30,7 @@ export class MenuProductsComponent implements OnInit {
   async selectOptionsType(select: string): Promise<void>{
     this.allOptions = await this.db.getMenuOptions(select);
     this.partialOptions = this.allOptions.options.slice(0, 5);
+    this.calcPaginatorOptions();
     this.viewOptions = true;
   }
 
@@ -39,6 +43,20 @@ export class MenuProductsComponent implements OnInit {
     const positionEnd: number = this.numberOptions + 5;
     this.partialOptions = this.allOptions.options.slice(this.numberOptions, positionEnd);
     this.allowEnabledBtn();
+  }
+
+  decidePaginatorPosition(addOrRemove: number): void{
+    this.paginatorPosition += addOrRemove;
+  }
+
+  calcPaginatorOptions(): void{
+    let calc: number = this.allOptions.options.length / 5;
+    if(!(this.allOptions.options.length % 2)){
+      calc = parseFloat((calc + 1).toFixed(0));
+    }
+    for (let index = 0; index < calc; index++) {
+      this.paginatorOptions.push(index);
+    }
   }
 
   allowEnabledBtn(): void{

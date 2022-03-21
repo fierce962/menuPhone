@@ -21,12 +21,16 @@
     <div class="contenct-options__btn-zone">
         <ion-button color="primary" 
             [disabled]="btnLeftDisabled"
-            (click)="changeViewOptions(-5)">
+            (click)="changeViewOptions(-5); decidePaginatorPosition(-1)">
             <ion-icon name="caret-back-outline"></ion-icon>
         </ion-button>
+        <div class="contenct-options__paginator">
+            <ion-button *ngFor="let paginator of paginatorOptions; index as i"
+            [color]="paginatorPosition === i ? 'medium' : 'light'">{{ paginator + 1 }}</ion-button>
+        </div>
         <ion-button color="primary" 
             [disabled]="btnRigthDisabled"
-            (click)="changeViewOptions(+5)">
+            (click)="changeViewOptions(+5); decidePaginatorPosition(+1)">
             <ion-icon name="caret-forward-outline"></ion-icon>
         </ion-button>
     </div>

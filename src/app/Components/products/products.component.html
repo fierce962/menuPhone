@@ -1,5 +1,5 @@
 
-<div class="product" *ngFor="let product of products">
+<div class="product" *ngFor="let product of products; index as i">
 
   <img class="product__img" [src]="product.img" alt="">
 
@@ -10,16 +10,16 @@
   </div>
 
   <div class="product__request">
-    <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, 0)" color="primary">
+    <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, i)" color="primary">
       <ion-icon name="add-outline"></ion-icon>
     </ion-button>
 
     <div class="product__request-content-input">
       <ion-input #inputs class="product__request-input" 
-        (keyup)="validKeyInput(0)" (ionBlur)="blurInput(0)" value="1"></ion-input>
+        (keyup)="validKeyInput(i)" (ionBlur)="blurInput(i)" value="1"></ion-input>
     </div>
 
-    <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, 0)" color="primary">
+    <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, i)" color="primary">
       <ion-icon name="remove-outline"></ion-icon>
     </ion-button>
     <ion-button class="product__request-btn" color="primary">Ordenar</ion-button>
