@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { RequestProduct } from '../../models/interface';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Products } from 'src/app/models/interface';
 
 @Component({
   selector: 'app-products',
@@ -9,10 +9,9 @@ import { RequestProduct } from '../../models/interface';
 })
 export class ProductsComponent implements OnInit {
 
+  @Input() products: Products[];
 
   @ViewChildren('inputs', { read: ElementRef }) inputs: QueryList<ElementRef>;
-
-  requestProduct: RequestProduct[] = [];
 
   constructor() { }
 

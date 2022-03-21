@@ -9,7 +9,7 @@ import { OptionsMenu } from 'src/app/models/interface';
 })
 export class MenuProductsComponent implements OnInit {
 
-  @Output() selected: EventEmitter<string> = new EventEmitter();
+  @Output() selectedOption: EventEmitter<string> = new EventEmitter();
 
   allOptions: OptionsMenu;
   partialOptions: string[];
@@ -52,6 +52,10 @@ export class MenuProductsComponent implements OnInit {
     }else{
       this.btnLeftDisabled = true;
     }
+  }
+
+  setOption(optionName: string): void{
+    this.selectedOption.emit(optionName);
   }
 
 }

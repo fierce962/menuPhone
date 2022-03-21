@@ -17,8 +17,8 @@ export class DatabaseService {
 
   constructor() { }
 
-  async getProducts(classProduct: string, type: string): Promise<Products>{
-    return await getDocs(query(collection(this.db, classProduct), where('type', '==', type)))
+  async getProducts(type: string): Promise<Products[]>{
+    return await getDocs(query(collection(this.db, 'food'), where('type', '==', type)))
     .then(results=>{
       const products: Products[] | any = [];
       results.docs.forEach(result=>{

@@ -1,12 +1,12 @@
 
-<div class="product">
+<div class="product" *ngFor="let product of products">
 
-  <img class="product__img" src="../../../assets/test.jpg" alt="">
+  <img class="product__img" [src]="product.img" alt="">
 
   <div class="product__info">
-    <h1 class="product__info-title">Ceviche de Camarón</h1>
-    <p class="product__info-description">Pescado de roca, camarón, pepino, apio y palta</p>
-    <p class="product__price">$10.500</p>
+    <h1 class="product__info-title">{{ product.title }}</h1>
+    <p class="product__info-description">{{ product.description }}</p>
+    <p class="product__price">{{ product.price }}</p>
   </div>
 
   <div class="product__request">

@@ -16,5 +16,6 @@
 
 <ion-content [fullscreen]="true" color="dark">
   <app-scan-qr *ngIf="false"></app-scan-qr>
-  <app-menu-products></app-menu-products>
+  <app-menu-products *ngIf="viewMenuProduc" (selectedOption)="getProdut($event)"></app-menu-products>
+  <app-products *ngIf="!viewMenuProduc" [products]="products"></app-products>
 </ion-content>

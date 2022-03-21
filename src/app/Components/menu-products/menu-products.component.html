@@ -13,6 +13,7 @@
 <div class="contenct-options" *ngIf="viewOptions">
     <div class="contenct-options__opntions">
         <ion-button *ngFor="let option of partialOptions" 
+            (click)="setOption(option)"
             class="contenct-options__btn-options"
             color="danger">{{option}}</ion-button>
     </div>

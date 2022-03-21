@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DatabaseService } from '../services/database/database.service';
+import { Products } from '../models/interface';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  products: Products[];
 
+  viewMenuProduc = true;
+
+  constructor(private db: DatabaseService) {}
+
+  async getProdut(option: string): Promise<void>{
+    this.viewMenuProduc = false;
+    this.products = await this.db.getProducts(option);
+  }
 }
