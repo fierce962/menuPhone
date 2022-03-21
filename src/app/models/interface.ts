@@ -10,3 +10,9 @@ export interface OptionsMenu{
     options: string[];
     category: string;
 }
+
+export interface AccountProduts{
+    product: Products;
+    amount: string;
+    totalPrice: string;
+}

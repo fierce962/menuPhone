@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Products } from 'src/app/models/interface';
+import { SessionsService } from 'src/app/services/sessions/sessions.service';
+import { Products, AccountProduts } from 'src/app/models/interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -10,12 +12,25 @@ import { Products } from 'src/app/models/interface';
 export class ProductsComponent implements OnInit {
 
   @Input() products: Products[];
-
   @ViewChildren('inputs', { read: ElementRef }) inputs: QueryList<ElementRef>;
 
-  constructor() { }
+  accountProduts: AccountProduts[];
 
-  ngOnInit() {}
+  constructor(private sessions: SessionsService,
+    private router: Router) { }
+
+  ngOnInit() {
+    this.hasProducts();
+  }
+
+  hasProducts(): void{
+    if(this.router.url === '/tabs/tab2'){
+      this.accountProduts = [... this.sessions.accountProduts];
+      this.accountProduts.forEach(account => {
+        this.products.push(account.product);
+      });
+    }
+  }
 
   addOrRemoveInput(value: number, index: number): void{
     // eslint-disable-next-line radix
@@ -44,7 +59,25 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  addOrder(): void{
-    //this.requestProduct.push();
+  addOrder(productSelect: Products, index: number): void{
+    const inputAmount = this.inputs['_results'][index].nativeElement.value;
+    if(this.sessions.accountProduts.length === 0){
+      this.sessions.accountProduts.push({
+        product: productSelect,
+        amount: inputAmount,
+        totalPrice: this.calcTotalPrice(productSelect.price, inputAmount)
+      });
+    }else{
+      this.sessions.accountProduts.forEach(product =>{
+        product.amount = inputAmount;
+        product.totalPrice = this.calcTotalPrice(productSelect.price, inputAmount);
+      });
+    }
+  }
+
+  calcTotalPrice(price: string , inputAmount: string): string{
+    const parsePrice = price.split('.').join('');
+    // eslint-disable-next-line radix
+    return ( parseInt(parsePrice) * parseInt(inputAmount) ).toString();
   }
 }

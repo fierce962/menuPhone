@@ -11,27 +11,7 @@
 </div>
 
 <div class="contenct-options" *ngIf="viewOptions">
-    <div class="contenct-options__opntions">
-        <ion-button *ngFor="let option of partialOptions" 
-            (click)="setOption(option)"
-            class="contenct-options__btn-options"
-            color="danger">{{option}}</ion-button>
-    </div>
-
-    <div class="contenct-options__btn-zone">
-        <ion-button color="primary" 
-            [disabled]="btnLeftDisabled"
-            (click)="changeViewOptions(-5); decidePaginatorPosition(-1)">
-            <ion-icon name="caret-back-outline"></ion-icon>
-        </ion-button>
-        <div class="contenct-options__paginator">
-            <ion-button *ngFor="let paginator of paginatorOptions; index as i"
-            [color]="paginatorPosition === i ? 'medium' : 'light'">{{ paginator + 1 }}</ion-button>
-        </div>
-        <ion-button color="primary" 
-            [disabled]="btnRigthDisabled"
-            (click)="changeViewOptions(+5); decidePaginatorPosition(+1)">
-            <ion-icon name="caret-forward-outline"></ion-icon>
-        </ion-button>
-    </div>
+    <ion-button class="contenct-options__option" *ngFor="let option of menuOptions.options" 
+        (click)="setOption(option)"
+        color="danger">{{option}}</ion-button>
 </div>

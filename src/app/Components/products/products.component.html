@@ -6,10 +6,13 @@
   <div class="product__info">
     <h1 class="product__info-title">{{ product.title }}</h1>
     <p class="product__info-description">{{ product.description }}</p>
-    <p class="product__price">{{ product.price }}</p>
+    <p class="product__price">
+      <label *ngIf="accountProduts !== undefined">{{accountProduts[i].amount}} * </label>
+      ${{ product.price }}
+    </p>
   </div>
 
-  <div class="product__request">
+  <div class="product__request" *ngIf="accountProduts === undefined">
     <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, i)" color="primary">
       <ion-icon name="add-outline"></ion-icon>
     </ion-button>
@@ -22,7 +25,10 @@
     <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, i)" color="primary">
       <ion-icon name="remove-outline"></ion-icon>
     </ion-button>
-    <ion-button class="product__request-btn" color="primary">Ordenar</ion-button>
+    <ion-button class="product__request-btn" color="primary"
+      (click)="addOrder(product, i)">
+      <ion-icon name="add-outline"></ion-icon> Orden
+    </ion-button>
   </div>
 
 </div>

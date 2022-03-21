@@ -23,33 +23,13 @@
 
 .contenct-options{
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    &__opntions{
+    flex-wrap: wrap;
+    padding: 15px 0px;
+    box-sizing: border-box;
+    &__option{
         width: 80%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    &__btn-options{
-        width: 100%;
-        position: relative;
-        left: -100%;
-        animation: view-left 0.8s;
-        animation-fill-mode: forwards;
-    }
-    &__btn-zone{
-        width: 80%;
-        display: flex;
-        justify-content: space-between;
-    }
-    &__paginator{
-        width: calc(100% - 140px);
-        height: 36px;
     }
 }
 
