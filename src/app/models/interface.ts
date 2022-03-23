@@ -1,4 +1,5 @@
 export interface Products{
+    id: string;
     title: string;
     img: string;
     description: string;
@@ -13,6 +14,18 @@ export interface OptionsMenu{
 
 export interface AccountProduts{
     product: Products;
+    amount: string;
+    totalPrice: string;
+}
+
+export interface RequestDesk{
+    deskNumber: string;
+    requestMenu: RequestMenu[];
+}
+
+export interface RequestMenu{
+    idProduct: string;
+    nameProduc: string;
     amount: string;
     totalPrice: string;
 }

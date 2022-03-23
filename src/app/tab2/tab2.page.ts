@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionsService } from '../services/sessions/sessions.service';
+import { DatabaseService } from '../services/database/database.service';
+import { RequestDesk, RequestMenu } from '../models/interface';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -6,12 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab2Page implements OnInit {
 
-  viewProducts = false;
+  constructor(private sessions: SessionsService, private db: DatabaseService) {}
 
-  constructor() {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  endRequestMenu(): void{
+    const requestDesk: RequestDesk = {
+      deskNumber: '1',
+      requestMenu: this.createRequestDesk()
+    };
+    this.db.setDeskRequest(requestDesk);
+  }
 
+  createRequestDesk(): RequestMenu[]{
+    const requestMenu: RequestMenu[] = [];
+    this.sessions.accountProduts.forEach(accountProduct=>{
+      requestMenu.push({
+        amount: accountProduct.amount,
+        idProduct: accountProduct.product.id,
+        nameProduc: accountProduct.product.title,
+        totalPrice: accountProduct.totalPrice
+      });
+    });
+    return requestMenu;
   }
 
 }

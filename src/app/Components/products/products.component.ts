@@ -2,7 +2,6 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { SessionsService } from 'src/app/services/sessions/sessions.service';
 import { Products, AccountProduts } from 'src/app/models/interface';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -16,15 +15,14 @@ export class ProductsComponent implements OnInit {
 
   accountProduts: AccountProduts[];
 
-  constructor(private sessions: SessionsService,
-    private router: Router) { }
+  constructor(private sessions: SessionsService) { }
 
   ngOnInit() {
     this.hasProducts();
   }
 
   hasProducts(): void{
-    if(this.router.url === '/tabs/tab2'){
+    if(this.products !== undefined && this.products.length === 0){
       this.accountProduts = [... this.sessions.accountProduts];
       this.accountProduts.forEach(account => {
         this.products.push(account.product);
