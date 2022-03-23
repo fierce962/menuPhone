@@ -6,8 +6,6 @@ import { AccountProduts } from '../../models/interface';
 })
 export class SessionsService {
 
-  accountProduts: AccountProduts[] = [];
-
   constructor() { }
 
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, addDoc, collection, getDocs, where, query, doc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
-import { Products, OptionsMenu, RequestDesk } from 'src/app/models/interface';
+import { Products, OptionsMenu, RequestDesk, RequestMenu } from 'src/app/models/interface';
 
 const app = initializeApp(environment.firebaseConfig);
 
@@ -44,4 +44,18 @@ export class DatabaseService {
   async setDeskRequest(requestDesk: RequestDesk): Promise<void>{
     await addDoc(collection(this.db, 'desk'), requestDesk);
   }
+
+  async getRequestMenu(desk: string): Promise<RequestMenu[]>{
+    return await getDocs(query(collection(this.db, 'desk'), where('deskNumber', '==', desk)))
+    .then(results=>{
+      const infoProducts: RequestMenu[] = [];
+      results.docs.forEach(deskRequest=>{
+        deskRequest.data().requestMenu.forEach((infoRequest: RequestMenu)=>{
+          infoProducts.push(infoRequest);
+        });
+      });
+      return infoProducts;
+    });
+  }
+
 }

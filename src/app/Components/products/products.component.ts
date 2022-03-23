@@ -17,27 +17,33 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   accountProduts: AccountProduts[];
 
-  constructor(private sessions: SessionsService, private storage: StorageService,
+  constructor(private storage: StorageService,
     private router: Router) { }
 
   ngOnInit() {
-    this.hasProducts();
-  }
-
-  ngAfterViewInit(): void {
     this.hasStorageProducts();
   }
 
-  hasProducts(): void{
-    if(this.products !== undefined && this.products.length === 0){
-      this.accountProduts = [... this.sessions.accountProduts];
-      this.accountProduts.forEach(account => {
-        this.products.push(account.product);
-      });
-    }
+  ngAfterViewInit(): void {
+    this.setValueInput();
   }
 
   hasStorageProducts(): void{
+    if(this.products !== undefined && this.products.length === 0){
+      const account: StorageAccount = JSON.parse(this.storage.get('account'));
+      if(account !== null){
+        this.accountProduts = [];
+        Object.keys(account).forEach(key=>{
+          account[key].account.forEach(accountProduct=>{
+            this.products.push(accountProduct.product);
+            this.accountProduts.push(accountProduct);
+          });
+        });
+      }
+    }
+  }
+
+  setValueInput(): void{
     const account: StorageAccount = JSON.parse(this.storage.get('account'));
     if(account !== null && this.router.url === '/tabs/tab1'){
       const category: string = this.products[0].category;
@@ -79,18 +85,6 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   addOrder(productSelect: Products, index: number): void{
     const inputAmount = this.inputs['_results'][index].nativeElement.value;
     const calcPrice = this.calcTotalPrice(productSelect.price, inputAmount);
-    if(this.sessions.accountProduts.length === 0){
-      this.sessions.accountProduts.push({
-        product: productSelect,
-        amount: inputAmount,
-        totalPrice: calcPrice
-      });
-    }else{
-      this.sessions.accountProduts.forEach(product =>{
-        product.amount = inputAmount;
-        product.totalPrice = calcPrice;
-      });
-    }
     this.createAccount(productSelect, calcPrice, inputAmount, index);
   }
 
