@@ -16,6 +16,13 @@ export interface AccountProduts{
     product: Products;
     amount: string;
     totalPrice: string;
+    indexProduct?: number;
+}
+
+export interface StorageAccount{
+    [categoryName: string]: {
+        account: AccountProduts[];
+    };
 }
 
 export interface RequestDesk{

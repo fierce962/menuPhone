@@ -16,7 +16,7 @@ export class Tab1Page {
   constructor(private db: DatabaseService) {}
 
   async getProdut(option: string): Promise<void>{
-    this.viewMenuProduc = false;
     this.products = await this.db.getProducts(option);
+    this.viewMenuProduc = false;
   }
 }
