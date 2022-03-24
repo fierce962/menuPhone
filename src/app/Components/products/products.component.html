@@ -1,26 +1,28 @@
 
-<div class="product" *ngFor="let product of products; index as i">
-
-  <app-product-view [product]="product" 
-      [accountProduts]="accountProduts !== undefined ? accountProduts[i] : undefined"></app-product-view>
-
-  <div class="product__request" *ngIf="accountProduts === undefined">
-    <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, i)" color="primary">
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-button>
-
-    <div class="product__request-content-input">
-      <ion-input #inputs class="product__request-input" 
-        (keyup)="validKeyInput(i)" (ionBlur)="blurInput(i)" value="1"></ion-input>
+<div *ngIf="viewProducts">
+  <div class="product" *ngFor="let product of products; index as i">
+  
+    <app-product-view [product]="product" 
+        [amount]="accountProduts !== undefined ? accountProduts[i].amount : undefined"></app-product-view>
+  
+    <div class="product__request" *ngIf="accountProduts === undefined">
+      <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, i)" color="primary">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+  
+      <div class="product__request-content-input">
+        <ion-input #inputs class="product__request-input" 
+          (keyup)="validKeyInput(i)" (ionBlur)="blurInput(i)" value="1"></ion-input>
+      </div>
+  
+      <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, i)" color="primary">
+        <ion-icon name="remove-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="product__request-btn" color="primary"
+        (click)="addOrder(product, i)">
+        <ion-icon name="add-outline"></ion-icon> Orden
+      </ion-button>
     </div>
-
-    <ion-button class="product__request-btn" (click)="addOrRemoveInput(-1, i)" color="primary">
-      <ion-icon name="remove-outline"></ion-icon>
-    </ion-button>
-    <ion-button class="product__request-btn" color="primary"
-      (click)="addOrder(product, i)">
-      <ion-icon name="add-outline"></ion-icon> Orden
-    </ion-button>
+  
   </div>
-
 </div>

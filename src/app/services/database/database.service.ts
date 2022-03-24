@@ -59,7 +59,7 @@ export class DatabaseService {
   }
 
   async getProductsByRequestMenu(productId: string): Promise<Products | any>{
-    return await getDoc(doc(this.db, 'products', 'CzrAw3wCEFMGY'))
+    return await getDoc(doc(this.db, 'products', productId))
     .then(results=> results.data());
   }
 

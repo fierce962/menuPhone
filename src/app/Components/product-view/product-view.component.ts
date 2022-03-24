@@ -9,7 +9,7 @@ import { Products, AccountProduts } from 'src/app/models/interface';
 export class ProductViewComponent implements OnInit {
 
   @Input() product: Products;
-  @Input() accountProduts: AccountProduts;
+  @Input() amount: string;
 
   constructor() { }
 

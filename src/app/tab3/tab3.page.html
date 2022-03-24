@@ -3,9 +3,16 @@
         <h1 class="contentAccount__value-acount">Su cuenta es ${{ totalAmount }}</h1>
         <ion-button color="primary"
             *ngIf="!viewPedidos"
-            (click)="viewPedidos = true">
+            (click)="viewPedidos = true; viewProducts()">
             Ver mis pedidos
         </ion-button>
+    </div>
+    <div *ngIf="viewAllProducts" class="products">
+        <div *ngFor="let product of products; index as i">
+            <app-product-view  
+                [product]="product" [amount]="amount[i]">
+            </app-product-view>
+        </div>
     </div>
     <ion-button class="btn-cancel" color="danger">
         Pagar

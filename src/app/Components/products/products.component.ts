@@ -17,6 +17,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   accountProduts: AccountProduts[];
 
+  viewProducts = false;
+
   constructor(private storage: StorageService,
     private router: Router) { }
 
@@ -41,6 +43,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         });
       }
     }
+    this.viewProducts = true;
   }
 
   setValueInput(): void{
