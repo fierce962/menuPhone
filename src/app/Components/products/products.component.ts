@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   viewProducts = false;
 
   constructor(private storage: StorageService,
-    private router: Router) { }
+    private router: Router,
+    private sessions: SessionsService) { }
 
   ngOnInit() {
     this.hasStorageProducts();
@@ -160,5 +161,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     account[this.products[index].category].account.splice(positionProductStore, 1);
     this.setStorageAccount(account);
     this.products.splice(index, 1);
+    if(this.products.length === 0){
+      this.sessions.setRemoveProduct();
+      this.storage.remove('account');
+    }
   }
 }

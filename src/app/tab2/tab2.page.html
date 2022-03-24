@@ -1,6 +1,15 @@
 <ion-content [fullscreen]="true" color="dark">
-    <app-products [products]="[]"></app-products>
-    <ion-button class="btn-end" color="danger" (click)="endRequestMenu()">
+    <app-products [products]="[]" *ngIf="viewProducts"></app-products>
+    <ion-button *ngIf="btnEndOrder" 
+        class="btn-end" 
+        color="danger" 
+        (click)="endRequestMenu()">
         Terminar Orden
     </ion-button>
+    <div class="error-message">
+        <div class="error-message__content-icon">
+            <ion-icon class="error-message__icon" name="clipboard-outline"></ion-icon>
+        </div>
+        <h1>No ha realizado ningun pedido</h1>
+    </div>
 </ion-content>

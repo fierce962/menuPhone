@@ -1,7 +1,7 @@
 
 <div *ngIf="viewProducts">
   <div class="product" *ngFor="let product of products; index as i">
-    <div class="product__btn-zone-floating">
+    <div class="product__btn-zone-floating" *ngIf="accountProduts !== undefined">
       <ion-icon class="product__btn-options" 
         (click)="editProduct(i)"
         name="pencil-sharp"></ion-icon>
