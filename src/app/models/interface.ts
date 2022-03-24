@@ -5,6 +5,7 @@ export interface Products{
     description: string;
     price: string;
     category: string;
+    edit?: boolean;
 }
 
 export interface OptionsMenu{

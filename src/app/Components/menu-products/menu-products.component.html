@@ -1,3 +1,9 @@
+<ion-fab class="btn-back" [class.btn-back__view]="viewOptions">
+    <ion-fab-button (click)="removeMenuOptions()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+
 <div class="content-menu" *ngIf="!viewOptions">
     <ion-button class="content-menu__input" 
         color="danger"

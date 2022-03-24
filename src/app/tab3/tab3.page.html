@@ -8,7 +8,7 @@
         </ion-button>
     </div>
     <div *ngIf="viewAllProducts" class="products">
-        <div *ngFor="let product of products; index as i">
+        <div class="products__product" *ngFor="let product of products; index as i">
             <app-product-view  
                 [product]="product" [amount]="amount[i]">
             </app-product-view>

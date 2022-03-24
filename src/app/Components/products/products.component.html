@@ -1,11 +1,19 @@
 
 <div *ngIf="viewProducts">
   <div class="product" *ngFor="let product of products; index as i">
+    <div class="product__btn-zone-floating">
+      <ion-icon class="product__btn-options" 
+        (click)="editProduct(i)"
+        name="pencil-sharp"></ion-icon>
+
+      <ion-icon (click)="removeProducts(i)" class="product__btn-options" name="trash-sharp"></ion-icon>
+    </div>
   
     <app-product-view [product]="product" 
         [amount]="accountProduts !== undefined ? accountProduts[i].amount : undefined"></app-product-view>
   
-    <div class="product__request" *ngIf="accountProduts === undefined">
+    <div class="product__request" 
+      [class.product__request-not-view]="accountProduts === undefined || product.edit !== undefined">
       <ion-button class="product__request-btn" (click)="addOrRemoveInput(+1, i)" color="primary">
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
@@ -20,7 +28,8 @@
       </ion-button>
       <ion-button class="product__request-btn" color="primary"
         (click)="addOrder(product, i)">
-        <ion-icon name="add-outline"></ion-icon> Orden
+        <ion-icon [name]="product.edit === undefined ? 'add-outline' : 'pencil-sharp' "></ion-icon> 
+        {{ product.edit === undefined ? 'Ordenar' : 'editar' }}
       </ion-button>
     </div>
   

@@ -1,5 +1,14 @@
 <ion-content [fullscreen]="true" color="dark">
   <app-scan-qr *ngIf="false"></app-scan-qr>
   <app-menu-products *ngIf="viewMenuProduc" (selectedOption)="getProdut($event)"></app-menu-products>
-  <app-products *ngIf="!viewMenuProduc" [products]="products"></app-products>
+  <div *ngIf="!viewMenuProduc" class="products">
+    <app-products [products]="products"></app-products>
+  </div>
+
+  <ion-fab class="btn-back" [class.btn-back__view]="!viewMenuProduc">
+    <ion-fab-button (click)="viewMenuProduc = true">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

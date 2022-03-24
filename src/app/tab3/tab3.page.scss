@@ -18,6 +18,9 @@
 .products{
     height: calc(100% - 61px);
     overflow-y: scroll;
+    &__product{
+        border-bottom: 1px solid #666666;
+    }
 }
 
 .btn-cancel{

@@ -89,6 +89,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     const inputAmount = this.inputs['_results'][index].nativeElement.value;
     const calcPrice = this.calcTotalPrice(productSelect.price, inputAmount);
     this.createAccount(productSelect, calcPrice, inputAmount, index);
+    if(productSelect.edit !== undefined){
+      this.accountProduts[index].amount = inputAmount;
+      productSelect.edit = undefined;
+    }
   }
 
   createAccount(productSelect: Products, calcPrice: string, inputAmount: string, index: number): void{
@@ -133,5 +137,28 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     const parsePrice = price.split('.').join('');
     // eslint-disable-next-line radix
     return ( parseInt(parsePrice) * parseInt(inputAmount) ).toString();
+  }
+
+  editProduct(index: number): void{
+    if(this.products[index].edit === undefined){
+      this.products[index].edit = true;
+      this.inputs['_results'][index].nativeElement.value = this.accountProduts[index].amount;
+    }else{
+      this.products[index].edit = undefined;
+    }
+  }
+
+  removeProducts(index: number): void{
+    const account: StorageAccount =  JSON.parse(this.storage.get('account'));
+    let positionProductStore: number;
+    account[this.products[index].category].account.some((product, i)=>{
+      if(this.products[index].id === product.product.id){
+        positionProductStore = i;
+        return true;
+      }
+    });
+    account[this.products[index].category].account.splice(positionProductStore, 1);
+    this.setStorageAccount(account);
+    this.products.splice(index, 1);
   }
 }
