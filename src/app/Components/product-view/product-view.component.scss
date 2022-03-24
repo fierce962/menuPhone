@@ -1,0 +1,23 @@
+.product{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+    &__img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+    &__info{
+        width: calc(100% - 120px);   
+    }
+    &__info-title{
+        margin: 0px 0px 5px 0px;
+    }
+    &__info-description{
+        margin: 10px;
+        font-size: 16px;
+    }
+    &__price{
+        font-size: 20px;
+    }
+}

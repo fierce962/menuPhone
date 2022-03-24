@@ -1,0 +1,12 @@
+<div class="product">
+  <img class="product__img" [src]="product.img" alt="">
+  
+  <div class="product__info">
+    <h1 class="product__info-title">{{ product.title }}</h1>
+    <p class="product__info-description">{{ product.description }}</p>
+    <p class="product__price">
+      <label *ngIf="accountProduts !== undefined">{{accountProduts.amount}} * </label>
+      ${{ product.price }}
+    </p>
+  </div>
+</div>

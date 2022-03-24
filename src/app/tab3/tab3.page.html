@@ -1,8 +1,13 @@
 <ion-content [fullscreen]="true" color="dark">
-    <div class="contentAccount">
-        <h1 class="contentAccount__value-acount">El total de su cuenta es ${{ totalAmount }}</h1>
+    <div class="contentAccount" [class.contentAccount--viewPedido]="viewPedidos">
+        <h1 class="contentAccount__value-acount">Su cuenta es ${{ totalAmount }}</h1>
+        <ion-button color="primary"
+            *ngIf="!viewPedidos"
+            (click)="viewPedidos = true">
+            Ver mis pedidos
+        </ion-button>
     </div>
-    <ion-button color="primary">
-        Ver mis pedidos
+    <ion-button class="btn-cancel" color="danger">
+        Pagar
     </ion-button>
 </ion-content>

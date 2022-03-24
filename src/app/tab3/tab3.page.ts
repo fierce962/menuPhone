@@ -10,6 +10,10 @@ export class Tab3Page implements OnInit {
 
   totalAmount: string;
 
+  viewPedidos = false;
+
+  infoRequest: RequestMenu[];
+
   constructor(private db: DatabaseService) {}
 
   ngOnInit(): void {
@@ -17,13 +21,12 @@ export class Tab3Page implements OnInit {
   }
 
   async calcTotalAccount(){
-    const infoRequest: RequestMenu[] = await this.db.getRequestMenu('1');
+    this.infoRequest  = await this.db.getRequestMenu('1');
     let amount = 0;
-    infoRequest.forEach(request=>{
+    this.infoRequest.forEach(request=>{
       // eslint-disable-next-line radix
       amount += parseInt(request.totalPrice);
     });
-    console.log(amount);
     this.totalAmount = this.parseAmount(amount);
   }
 
@@ -36,6 +39,12 @@ export class Tab3Page implements OnInit {
       };
     });
     return parseAmount.reverse().join('');
+  }
+
+  async viewProducts(): Promise<void>{
+    await Promise.all(
+      this.infoRequest.map(info=> this.db.getProductsByRequestMenu(info.idProduct) )
+    );
   }
 
 }
