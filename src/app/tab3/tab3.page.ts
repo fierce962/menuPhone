@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 import { Component, OnInit } from '@angular/core';
 import { AccountProduts, Products, RequestMenu } from '../models/interface';
 import { DatabaseService } from '../services/database/database.service';
@@ -28,8 +29,15 @@ export class Tab3Page implements OnInit {
   ngOnInit(): void {
   }
 
-  ionViewWillEnter(): void{
-    this.calcTotalAccount();
+  async ionViewWillEnter(): Promise<void>{
+    await this.calcTotalAccount();
+    if(this.viewPedidos === true){
+      this.products.length = 0;
+      this.amount.length = 0;
+      this.viewAllProducts = false;
+      await this.viewProducts();
+    }
+    this.load = false;
   }
 
   ionViewWillLeave(): void{
@@ -37,14 +45,13 @@ export class Tab3Page implements OnInit {
   }
 
   async calcTotalAccount(){
-    this.infoRequest  = await this.db.getRequestMenu(this.storage.get('desk'));
+    this.infoRequest = await this.db.getRequestMenu(this.storage.get('desk'));
     let amount = 0;
     this.infoRequest.forEach(request=>{
       // eslint-disable-next-line radix
       amount += parseInt(request.totalPrice);
     });
     this.totalAmount = this.parseAmount(amount);
-    this.load = false;
   }
 
   parseAmount(amount: number): string{
@@ -61,19 +68,38 @@ export class Tab3Page implements OnInit {
   }
 
   async viewProducts(): Promise<void>{
+    const products = await this.getProductsEqualId();
+    this.infoRequest.forEach(info=>{
+      this.products.push(products[info.idProduct]);
+      this.amount.push(info.amount);
+    });
+    this.viewAllProducts = true;
+  }
+
+  async getProductsEqualId(){
+    const equal = this.getEquialId();
     await Promise.all(
       // eslint-disable-next-line arrow-body-style
-      this.infoRequest.map(info=>{
+      Object.keys(equal).map(key=>{
         return new Promise(resolve=>{
-          this.db.getProductsByRequestMenu(info.idProduct).then(product=>{
-            this.products.push(product);
-            this.amount.push(info.amount);
+          this.db.getProductsByIdPrduct(key).then(product=>{
+            equal[key] = product;
             resolve('');
           });
         });
       })
     );
-    this.viewAllProducts = true;
+    return equal;
+  }
+
+  getEquialId(): object{
+    const equal = {};
+    this.infoRequest.forEach(info => {
+      if(equal[info.idProduct] === undefined){
+        equal[info.idProduct] = 1;
+      };
+    });
+    return equal;
   }
 
 }

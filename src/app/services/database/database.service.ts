@@ -58,8 +58,18 @@ export class DatabaseService {
     });
   }
 
-  async getProductsByRequestMenu(productId: string): Promise<Products | any>{
+  async getProductsByIdPrduct(productId: string): Promise<Products>{
     return await getDoc(doc(this.db, 'products', productId))
-    .then(results=> results.data());
+    // eslint-disable-next-line arrow-body-style
+    .then(results=> {
+      return {
+        id: results.id,
+        category: results.data().category,
+        img: results.data().img,
+        description: results.data().description,
+        title: results.data().title,
+        price: results.data().price,
+      };
+    });
   }
 }
