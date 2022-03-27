@@ -41,7 +41,7 @@ export class Tab2Page implements OnInit {
 
   endRequestMenu(): void{
     const requestDesk: RequestDesk = {
-      deskNumber: '1',
+      deskNumber: this.storage.get('desk'),
       requestMenu: this.createRequestDesk()
     };
     this.db.setDeskRequest(requestDesk);

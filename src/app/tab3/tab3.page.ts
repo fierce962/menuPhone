@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountProduts, Products, RequestMenu } from '../models/interface';
 import { DatabaseService } from '../services/database/database.service';
+import { StorageService } from '../services/storage/storage.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -20,14 +21,14 @@ export class Tab3Page implements OnInit {
 
   infoRequest: RequestMenu[];
 
-  constructor(private db: DatabaseService) {}
+  constructor(private db: DatabaseService, private storage: StorageService) {}
 
   ngOnInit(): void {
     this.calcTotalAccount();
   }
 
   async calcTotalAccount(){
-    this.infoRequest  = await this.db.getRequestMenu('1');
+    this.infoRequest  = await this.db.getRequestMenu(this.storage.get('desk'));
     let amount = 0;
     this.infoRequest.forEach(request=>{
       // eslint-disable-next-line radix

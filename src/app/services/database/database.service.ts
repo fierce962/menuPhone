@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, getDocs, where, query, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, addDoc, collection, getDocs, where, query, doc, getDoc, setDoc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import { Products, OptionsMenu, RequestDesk, RequestMenu } from 'src/app/models/interface';
 
@@ -62,5 +62,4 @@ export class DatabaseService {
     return await getDoc(doc(this.db, 'products', productId))
     .then(results=> results.data());
   }
-
 }

@@ -1,5 +1,4 @@
 <ion-content [fullscreen]="true" color="dark">
-  <app-scan-qr *ngIf="false"></app-scan-qr>
   <app-menu-products *ngIf="viewMenuProduc" (selectedOption)="getProdut($event)"></app-menu-products>
   <div *ngIf="!viewMenuProduc" class="products">
     <app-products [products]="products"></app-products>
@@ -10,5 +9,4 @@
         <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

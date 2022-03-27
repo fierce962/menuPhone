@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { ScanQrComponent } from '../Components/scan-qr/scan-qr.component';
 import { MenuProductsComponent } from '../Components/menu-products/menu-products.component';
 import { ProductsModule } from '../Components/products/products.module';
 @NgModule({
@@ -16,6 +15,6 @@ import { ProductsModule } from '../Components/products/products.module';
     ProductsModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page, ScanQrComponent, MenuProductsComponent]
+  declarations: [Tab1Page, MenuProductsComponent]
 })
 export class Tab1PageModule {}
