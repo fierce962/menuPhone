@@ -14,6 +14,7 @@ export class Tab2Page implements OnInit {
   btnEndOrder = false;
 
   viewErrorMessage = true;
+  errorMessage = 'No ha seleccionado ningun producto';
 
   constructor(private db: DatabaseService,
     private storage: StorageService,
@@ -35,6 +36,7 @@ export class Tab2Page implements OnInit {
   ionViewWillLeave(): void{
     this.viewProducts = false;
     this.btnEndOrder = false;
+    this.errorMessage = 'No ha seleccionado ningun producto';
   }
 
   setViewError(): void{
@@ -59,6 +61,10 @@ export class Tab2Page implements OnInit {
     };
     this.db.setDeskRequest(requestDesk);
     this.storage.remove('account');
+    this.errorMessage = 'Su pedido llegara pronto por favor espere';
+    this.viewProducts = false;
+    this.btnEndOrder = false;
+    this.viewErrorMessage = true;
   }
 
   createRequestDesk(): RequestMenu[]{

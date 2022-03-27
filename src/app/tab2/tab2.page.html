@@ -7,9 +7,13 @@
         Terminar Orden
     </ion-button>
     <div class="error-message" *ngIf="viewErrorMessage">
-        <div class="error-message__content-icon">
+        <div *ngIf="errorMessage === 'Su pedido llegara pronto por favor espere' ">
+            <ion-icon class="error-message__icon" name="warning-outline"></ion-icon>
+        </div>
+        <div class="error-message__content-icon" 
+            *ngIf="errorMessage === 'No ha seleccionado ningun producto' ">
             <ion-icon class="error-message__icon" name="clipboard-outline"></ion-icon>
         </div>
-        <h1>No ha realizado ningun pedido</h1>
+        <h1>{{ errorMessage }}</h1>
     </div>
 </ion-content>
