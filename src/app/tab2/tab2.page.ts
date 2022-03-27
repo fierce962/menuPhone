@@ -13,6 +13,8 @@ export class Tab2Page implements OnInit {
   viewProducts = false;
   btnEndOrder = false;
 
+  viewErrorMessage = true;
+
   constructor(private db: DatabaseService,
     private storage: StorageService,
     private sessions: SessionsService) {}
@@ -20,17 +22,28 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
     this.sessions.getRemoveProduct().subscribe(remove=>{
       this.btnEndOrder = !remove;
+      this.viewErrorMessage = true;
     });
   }
 
   ionViewWillEnter(): void{
     this.viewProducts = true;
     this.viewbtnOrder();
+    this.setViewError();
   }
 
   ionViewWillLeave(): void{
     this.viewProducts = false;
     this.btnEndOrder = false;
+  }
+
+  setViewError(): void{
+    const products = this.storage.get('account');
+    if(products === null){
+      this.viewErrorMessage = true;
+    }else{
+      this.viewErrorMessage = false;
+    }
   }
 
   viewbtnOrder(): void{

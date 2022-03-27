@@ -21,10 +21,19 @@ export class Tab3Page implements OnInit {
 
   infoRequest: RequestMenu[];
 
+  load = true;
+
   constructor(private db: DatabaseService, private storage: StorageService) {}
 
   ngOnInit(): void {
+  }
+
+  ionViewWillEnter(): void{
     this.calcTotalAccount();
+  }
+
+  ionViewWillLeave(): void{
+    this.load = true;
   }
 
   async calcTotalAccount(){
@@ -35,6 +44,7 @@ export class Tab3Page implements OnInit {
       amount += parseInt(request.totalPrice);
     });
     this.totalAmount = this.parseAmount(amount);
+    this.load = false;
   }
 
   parseAmount(amount: number): string{

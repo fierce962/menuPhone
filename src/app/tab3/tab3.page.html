@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" color="dark">
-    <div class="contentAccount" [class.contentAccount--viewPedido]="viewPedidos">
+    <div class="contentAccount" [class.contentAccount--viewPedido]="viewPedidos" *ngIf="!load">
         <h1 class="contentAccount__value-acount">Su cuenta es ${{ totalAmount }}</h1>
         <ion-button color="primary"
             *ngIf="!viewPedidos"
@@ -14,7 +14,20 @@
             </app-product-view>
         </div>
     </div>
-    <ion-button class="btn-cancel" color="danger">
+    <ion-button class="btn-cancel" color="danger" *ngIf="!load">
         Pagar
     </ion-button>
+
+    <div class="loadAccount" *ngIf="load">
+        <div class="loadAccount__content-img">
+            <img class="loadAccount__img" 
+                src="https://buteco.cl/wp-content/uploads/2021/07/logo-Buteco-600.png" alt="">
+        </div>
+        <div class="loadAccount__text">
+            <label>Cargando</label>
+            <div class="loadAccount__point"></div>
+            <div class="loadAccount__point loadAccount__point-two"></div>
+            <div class="loadAccount__point loadAccount__point-three"></div>
+        </div>
+    </div>
 </ion-content>
